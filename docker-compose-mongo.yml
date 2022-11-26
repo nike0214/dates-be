@@ -1,0 +1,16 @@
+version: "3.7" 
+
+services: 
+  mongodb:          
+    image: mongo    
+    restart: always 
+    environment:    
+      MONGO_INITDB_ROOT_USERNAME: label
+      MONGO_INITDB_ROOT_PASSWORD: label1!
+    volumes:        
+      - type: bind 
+        source: /home/nike/mongodb # local path
+        target: /data/db  # path in container
+    container_name: "mongo" 
+    ports:                
+      - "27017:27017"     

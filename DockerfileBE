@@ -1,0 +1,14 @@
+FROM 601951286154.dkr.ecr.us-east-1.amazonaws.com/baseimage:latest AS builder
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+## Deploy
+FROM 601951286154.dkr.ecr.us-east-1.amazonaws.com/baseimage:latest
+WORKDIR /app
+RUN mkdir tmp
+COPY --from=builder /app ./
+
+EXPOSE 3000
+CMD ["npm", "run", "start:dev"]
