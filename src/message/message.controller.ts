@@ -60,7 +60,7 @@ export class MessageController {
   @Get('dates')
   @HttpCode(200)
   @ApiOperation({ summary: '날짜 정보 조회 API', description: '전체 날짜 목록을 조회한다 (2023년1월 대상)' })
-  @ApiCreatedResponse({ description: '전체 날짜 목록을 조회한다 (2023년1월 대상)' })
+  // @ApiCreatedResponse({ description: '전체 날짜 목록을 조회한다 (2023년1월 대상)' })
   findAllDateInfo() {
     return this.messageService.findAllDateInfo();
   }
