@@ -1,6 +1,6 @@
 **구성**  
 BE: typescript / Nest.js  
-DB: Sqlite3  
+DB: Sqlite3  (2023/1/1~31 기본 정보는 저장돼있습니다)
 Storage: AWS S3  
 (AccessKey와 SecretAccessKey는 카톡 통해 별도로 전달드리겠습니다)  
 ```
