@@ -5,11 +5,15 @@ import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
 import express from 'express';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { config } from 'rxjs';
+import * as fs from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
+    httpsOptions: {
+      key: fs.readFileSync('./private.pem'),
+      cert: fs.readFileSync('./cert.pem'),
+    },
   });
 
   app.enableCors({
