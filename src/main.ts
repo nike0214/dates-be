@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
 import express from 'express';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { config } from 'rxjs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -18,7 +20,7 @@ async function bootstrap() {
     credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204,
-  });  app.useGlobalPipes(
+  }); app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
       transformOptions: {
@@ -32,6 +34,24 @@ async function bootstrap() {
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
   // app.use(compression());
+
+  const config = new DocumentBuilder()
+    .setTitle('DATES API Example')
+    .setDescription('DATES API description')
+    .setVersion('1.0')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
+  });
 
   // app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 

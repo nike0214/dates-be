@@ -26,10 +26,10 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/mapped-types": "*",
-    "@nestjs/typeorm": "^9.0.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
+    "@nestjs/typeorm": "^9.0.0",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
@@ -42,7 +42,6 @@
     "helmet": "^5.0.2",
     "joi": "^17.6.0",
     "moment": "^2.29.3",
-    "typeorm": "^0.3.7",
     "nest-winston": "^1.6.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
@@ -50,9 +49,11 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "sqlite3": "^5.0.8",
+    "swagger-ui-express": "^4.6.0",
+    "typeorm": "^0.3.7",
     "unique-names-generator": "^4.6.0",
-    "winston": "^3.3.3",
-    "sqlite3": "^5.0.8"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

@@ -15,7 +15,7 @@ export class UserAuthDto {
   @ApiProperty({
     required: true,
     description: 'Ethereum account address',
-    example: '0x264D6BF791f6Be6F001A95e895AE0a904732d473',
+    example: '0xd261dd21ca5a8f3f6c850b3e447347eab3d367b1',
     minLength: 42,
     maxLength: 42,
   })

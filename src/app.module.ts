@@ -21,10 +21,10 @@ dotenv.config({
     process.env.NODE_ENV === 'prod'
       ? '.env.prod'
       : process.env.NODE_ENV === 'stage'
-      ? '.env.stage'
-      : process.env.NODE_ENV === 'test'
-      ? '.env.test'
-      : '.env.dev',
+        ? '.env.stage'
+        : process.env.NODE_ENV === 'test'
+          ? '.env.test'
+          : '.env.dev',
   ),
 });
 @Module({
@@ -36,7 +36,6 @@ dotenv.config({
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().valid('dev', 'prod', 'test'),
         JWT_SECRET: Joi.string().required(),
-        DATABASE_NAME: Joi.string().required(),
       }),
     }),
     WinstonModule.forRoot({
@@ -46,8 +45,8 @@ dotenv.config({
             process.env.NODE_ENV === 'prod'
               ? 'info'
               : process.env.NODE_ENV === 'test'
-              ? 'debug'
-              : 'silly',
+                ? 'debug'
+                : 'silly',
           format: winston.format.combine(
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike('LABEL', {
@@ -71,4 +70,4 @@ dotenv.config({
   providers: [],
   exports: [],
 })
-export class AppModule {}
+export class AppModule { }
