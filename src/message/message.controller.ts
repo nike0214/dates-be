@@ -4,6 +4,7 @@ import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { UpdateDateImageDto } from './dto/update-date-image.dto';
 
 @Controller('')
 export class MessageController {
@@ -46,6 +47,14 @@ export class MessageController {
   @ApiBearerAuth('access-token')
   remove(@Request() { user }, @Param('id') id: string) {
     return this.messageService.remove(user, +id);
+  }
+
+  @Patch('dates/image')
+  @UseGuards(AuthGuard('wallet-jwt'))
+  @ApiOperation({ summary: '특정일 이미지 업데이트 API', description: '특정일에 저장된 이미지를 업데이트 한다' })
+  @ApiBearerAuth('access-token')
+  updateDateImage(@Request() { user }, @Body() updateDateImageDto: UpdateDateImageDto) {
+    return this.messageService.updateDateImage(user, updateDateImageDto);
   }
 
   @Get('dates')

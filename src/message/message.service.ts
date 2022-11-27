@@ -9,6 +9,7 @@ import { DateMessage } from './entities/date-message.entity';
 import { WINSTON_MODULE_NEST_PROVIDER, WinstonLogger } from 'nest-winston';
 import { DateInfo } from './entities/date.entity';
 import { DateInfoRepository } from './entities/date.repository';
+import { UpdateDateImageDto } from './dto/update-date-image.dto';
 
 @Injectable()
 export class MessageService {
@@ -71,7 +72,23 @@ export class MessageService {
       }
       throw new InternalServerErrorException(error);
     }
+  }
 
+  async updateDateImage(user: any, updateDateImageDto: UpdateDateImageDto) {
+    try {
+      const result = await this.dateInfoRepository.update(
+        { date: updateDateImageDto.date },
+        { imgUrl: updateDateImageDto.imgUrl },
+      );
+
+      return { code: 1, data: result };
+    } catch (error) {
+      this.logger.error(error);
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async findOne(date: string) {
