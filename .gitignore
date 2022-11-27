@@ -40,7 +40,6 @@ testem.log
 Thumbs.db
 
 # Environment
-.env
 .env.test
 
 db
