@@ -1,9 +1,15 @@
 **구성**  
 BE: typescript / Nest.js  
-DB: Sqlite3
+DB: Sqlite3  
+Storage: AWS S3  
+(AccessKey와 SecretAccessKey는 카톡 통해 별도로 전달드리겠습니다)  
+```
+Bucket_NAME=dates-temp  
+AWS_S3_REGION=ap-northeast-2  
+```
 
 **Sequence diagram**
-로그인 관련 사항만 있고, 다른건 단순 API 호출이라 별도로 그리진 않았습니다  
+로그인 관련 사항 / 이미지 업로드(w.S3)만 있고, 다른건 단순 API 호출이라 별도로 그리진 않았습니다  
 확인해보시고 수정할거나 추가할거 있으면 말씀해주세요~!
 https://drive.google.com/file/d/1MkXP2NrPMbktdwvZLfHujIIsMS1FW0hT/view?usp=sharing
 
