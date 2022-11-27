@@ -8,9 +8,9 @@ Bucket_NAME=dates-temp
 AWS_S3_REGION=ap-northeast-2  
 ```
 
-**Sequence diagram**
+**Sequence diagram**  
 로그인 관련 사항 / 이미지 업로드(w.S3)만 있고, 다른건 단순 API 호출이라 별도로 그리진 않았습니다  
-확인해보시고 수정할거나 추가할거 있으면 말씀해주세요~!
+확인해보시고 수정할거나 추가할거 있으면 말씀해주세요~!  
 https://drive.google.com/file/d/1MkXP2NrPMbktdwvZLfHujIIsMS1FW0hT/view?usp=sharing
 
 
@@ -18,7 +18,7 @@ https://drive.google.com/file/d/1MkXP2NrPMbktdwvZLfHujIIsMS1FW0hT/view?usp=shari
 ```
 https://clesson-dev.duckdns.org:8888/api
 ```
-swagger 통해서 로그인 및 jwt 필요한 API 호출 가능하도록, signature 검증은 주석처리해놨습니다
+swagger 통해서 로그인 및 jwt 필요한 API 호출 가능하도록, 로그인 시 signature 검증은 주석처리해놨습니다
 
 **BE 서버 접속 경로**
 ```
