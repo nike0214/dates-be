@@ -10,7 +10,19 @@ import { WINSTON_MODULE_NEST_PROVIDER, WinstonLogger } from 'nest-winston';
 import { DateInfo } from './entities/date.entity';
 import { DateInfoRepository } from './entities/date.repository';
 import { UpdateDateImageDto } from './dto/update-date-image.dto';
+import AWS from 'aws-sdk';
 
+const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET;
+const s3 = new AWS.S3({
+  signatureVersion: 'v4',
+  endpoint: process.env.AWS_ENDPOINT,
+  region: process.env.AWS_S3_REGION,
+  useAccelerateEndpoint: true,
+});
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 @Injectable()
 export class MessageService {
   constructor(
@@ -106,6 +118,28 @@ export class MessageService {
   async findAllDateInfo() {
     const result = await this.dateInfoRepository.find();
     return { code: 1, data: result };
+  }
+
+  async getPreSignedUrl(fileName: string) {
+    try {
+      const params = {
+        Bucket: 'dates-temp',
+        Key: fileName,
+        Expires: 3600,
+        ContentType: 'image/jpeg',
+        ACL: 'public-read',
+      };
+      const s3Url = await s3.getSignedUrlPromise('putObject', params);
+
+      return {
+        code: 1,
+        data: s3Url
+      };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException(error);
+    }
+    return;
   }
 
   async update(user: any, id: number, updateMessageDto: UpdateMessageDto) {
