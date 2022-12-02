@@ -9,22 +9,13 @@ import * as fs from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: true,
     httpsOptions: {
       key: fs.readFileSync('./private.pem'),
       cert: fs.readFileSync('./cert.pem'),
     },
   });
 
-  app.enableCors({
-    origin: [
-      'http://localhost:3000',
-    ],
-    allowedHeaders: 'Content-Type, Accept, Authorization',
-    credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  }); app.useGlobalPipes(
+  app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
       transformOptions: {
@@ -57,7 +48,15 @@ async function bootstrap() {
     },
   });
 
-  // app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+    ],
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
 
   await app.listen(process.env.PORT);
 }
